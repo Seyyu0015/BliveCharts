@@ -3,8 +3,7 @@ import photo
 from bilibili_api import user, live, sync
 
 """连接房间获取礼物列表并排行"""
-# userobject = user.User(84125742)
-# photo.get_user_face(userobject)
+
 
 try:
     roomid = open('roomid.txt', 'r')

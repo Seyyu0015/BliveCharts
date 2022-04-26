@@ -1,3 +1,4 @@
+import os
 import urllib
 
 from bilibili_api import user, sync
@@ -11,7 +12,20 @@ user = user.User(84125742)
 
 
 # 保存用户的头像
-async def get_user_face(user):
-    urlStr = sync(user.get_user_info())['face']
+def get_user_face(user):
+    urlstr = sync(user.get_user_info())['face']
     mid = str(sync(user.get_user_info())['mid'])
-    urllib.request.urlretrieve(urlStr, filename='./userface/' + mid + '.png')
+    path = './userface/'
+    file_name_list = os.listdir(path)
+
+# 查找是否已下载头像
+    for filename in file_name_list:
+        if filename == mid + '.png':
+            break
+        # 下载头像
+        urllib.request.urlretrieve(urlstr, filename=path + mid + '.png')
+
+
+# 测试下载的方法
+if __name__ == "__main__":
+    get_user_face(user.User(84125742))
