@@ -57,7 +57,7 @@ while True:
         i = 1
     else:
         pass
-        # TODO:
+
         # photo.get_user_face(user.User(84125742))
 
 
