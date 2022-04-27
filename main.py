@@ -1,6 +1,10 @@
+import asyncio
 import datetime
-import photo
+
+import callback as callback
 from bilibili_api import user, live, sync
+
+import photo
 
 """连接房间获取礼物列表并排行"""
 
@@ -17,31 +21,23 @@ except:
     newsave.write(roomn)
     newsave.close()
 
-room = live.LiveDanmaku(roomn)
-data = 'danmusave\danmusave' + datetime.datetime.now().strftime('%y%m%d%H%M%S') + '.txt'
+room = live.LiveDanmaku(roomn)  # 直播间
+global user_id
 
 
 # 弹幕显示
 @room.on('DANMU_MSG')
 async def on_danmaku(event):
-    # 保存弹幕到文件
-    danmusave = open(data, 'a')
-    danmusave.write(datetime.datetime.now().strftime('%H:%M:%S'))
-    danmusave.write('\t')
-    danmusave.write(event['data']['info'][1])
-    danmusave.write('\t')
-    danmusave.write(event['data']['info'][2][1])
-    danmusave.write('\n')
-    danmusave.close()
-
+    global user_id
+    user_id = event['data']['info'][2][0]
     # 打印弹幕内容到输出
     print(datetime.datetime.now().strftime('%H:%M:%S'),  # 时间
           ' [弹幕]', event['data']['info'][1],  # 内容
           '\t\t{用户：', event['data']['info'][2][1],  # 用户名
           '，房间：', event['room_display_id'], '}')  # 直播间
-
-    # print(event['data']['info'][2][0])
-    photo.get_user_face(user.User(event['data']['info'][2][0]))
+    photo.doget = 1
+    photo.user_id = int(event['data']['info'][2][0])
+    print(photo.user_id)
 
 
 # 收到礼物
@@ -53,5 +49,17 @@ async def on_gift(event):
           event['data']['data']['giftName'],
           '\t价值:', event['data']['data']['gold'])
 
+i = 0
+while True:
 
-sync(room.connect())
+    if i != 1:
+        sync(room.connect())
+        i = 1
+    else:
+        pass
+        # TODO:
+        # photo.get_user_face(user.User(84125742))
+
+
+
+
