@@ -21,8 +21,10 @@ except:
     newsave.write(roomn)
     newsave.close()
 
+
 room = live.LiveDanmaku(roomn)  # 直播间
-global user_id
+
+user_id = 3456630  # 默认id值
 
 
 # 弹幕显示
@@ -35,8 +37,11 @@ async def on_danmaku(event):
           ' [弹幕]', event['data']['info'][1],  # 内容
           '\t\t{用户：', event['data']['info'][2][1],  # 用户名
           '，房间：', event['room_display_id'], '}')  # 直播间
-    photo.user_id = int(event['data']['info'][2][0])
-    print(photo.user_id)
+    user_id = int(event['data']['info'][2][0])
+    try:
+        await photo.get_user_face(user_id)
+    except:
+        pass
 
 
 # 收到礼物
@@ -47,17 +52,14 @@ async def on_gift(event):
           event['data']['data']['action'],
           event['data']['data']['giftName'],
           '\t价值:', event['data']['data']['gold'])
+    try:
+        await photo.get_user_face(user_id)
+    except:
+        pass
 
-# 运行弹幕爬虫后开始循环
 
-i = 0
+sync(room.connect())
 
-while True:
-    if i != 1:
-        sync(room.connect())
-        i = 1
-    else:
-        photo.get_user_face(photo.user_id)
 
 
 
