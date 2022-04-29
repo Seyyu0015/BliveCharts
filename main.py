@@ -1,8 +1,5 @@
-import asyncio
 import datetime
-
-import callback as callback
-from bilibili_api import user, live, sync
+from bilibili_api import live, sync
 
 import photo
 
