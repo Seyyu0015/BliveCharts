@@ -1,4 +1,7 @@
 import datetime
+import os
+import shutil
+
 from bilibili_api import live, sync
 
 import photo
@@ -24,6 +27,10 @@ room = live.LiveDanmaku(roomn)  # 直播间
 
 user_id = 3456630  # 默认id值
 rank_add_by_danmu = 1  # 弹幕增加的贡献值
+
+# 清空文件夹以刷新用户头像
+shutil.rmtree('./userface')
+os.mkdir('./userface')
 
 
 # 弹幕显示
