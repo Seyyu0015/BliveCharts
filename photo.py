@@ -28,10 +28,13 @@ async def get_user_face(user_id_getface):
         await face_download(user.User(user_id_getface))
 
     else:
+        exphoto = False
         for filename in file_name_list:
             if filename == str(user_id_getface) + '.png':
+                exphoto = True
                 break
-            # 下载头像
+        # 下载头像
+        if not exphoto:
             print('Photo：尝试下载' + str(user_id_getface))
             await face_download(user.User(user_id_getface))
 

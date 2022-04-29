@@ -2,6 +2,7 @@ import datetime
 from bilibili_api import live, sync
 
 import photo
+import rank
 
 """连接房间获取礼物列表并排行"""
 
@@ -22,6 +23,7 @@ except:
 room = live.LiveDanmaku(roomn)  # 直播间
 
 user_id = 3456630  # 默认id值
+rank_add_by_danmu = 1  # 弹幕增加的贡献值
 
 
 # 弹幕显示
@@ -36,6 +38,7 @@ async def on_danmaku(event):
           '，房间：', event['room_display_id'], '}')  # 直播间
     user_id = int(event['data']['info'][2][0])
     try:
+        rank.add_user_dict(user_id, rank_add_by_danmu)
         await photo.get_user_face(user_id)
     except:
         pass
@@ -48,8 +51,13 @@ async def on_gift(event):
           '【礼物】\t', event['data']['data']['uname'],
           event['data']['data']['action'],
           event['data']['data']['giftName'],
-          '\t价值:', event['data']['data']['gold'])
+          '\t价值:', event['data']['data']['price'])
+    print(event)
     try:
+        if event['data']['data']['giftName'] == '辣条':
+            rank.add_user_dict(user_id, 0)
+        else:
+            rank.add_user_dict(user_id, event['data']['data']['price'])
         await photo.get_user_face(user_id)
     except:
         pass
