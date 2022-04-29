@@ -1,9 +1,10 @@
+"""
+用户信息
+
+"""
 import os
 import urllib
-
-from bilibili_api import user, sync
-
-"""提供获取用户信息"""
+from bilibili_api import user
 
 
 # 保存用户的头像

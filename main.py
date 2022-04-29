@@ -1,32 +1,32 @@
+"""
+主方法
+
+"""
 import datetime
 import os
 import shutil
-
 from bilibili_api import live, sync
-
 import photo
 import rank
-
-"""连接房间获取礼物列表并排行"""
 
 try:
     roomid = open('roomid.txt', 'r')
     roomn = int(roomid.read())
     roomid.close()
-    print('roomid:', roomn)
-
 except:
     print('未从roomid.txt中获取信息')
     roomn = input('输入房间号来自动创建roomid.txt：')
     newsave = open('roomid.txt', 'a')
     newsave.write(roomn)
     newsave.close()
+room = live.LiveDanmaku(roomn)
 
-
-room = live.LiveDanmaku(roomn)  # 直播间
-
-user_id = 3456630  # 默认id值
-rank_add_by_danmu = 1  # 弹幕增加的贡献值
+"""
++user_id：默认的用户id。
++rank_add_by_danmu：每发送一个弹幕所增加的贡献值。
+"""
+user_id = 3456630
+rank_add_by_danmu = 1
 
 # 清空文件夹以刷新用户头像
 shutil.rmtree('./userface')
@@ -71,8 +71,3 @@ async def on_gift(event):
 
 
 sync(room.connect())
-
-
-
-
-
