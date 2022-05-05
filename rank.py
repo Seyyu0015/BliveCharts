@@ -1,9 +1,10 @@
+import config
+
 """
 排名控制
 
-+freegift： 免费礼物增加的贡献值,0为不增加。
 """
-freegift = 10
+
 
 user_dict = {}  # 初始化数组
 
@@ -12,14 +13,14 @@ user_dict = {}  # 初始化数组
 def add_user_dict(mname, number: int):
     # 免费礼物价值
     if number == 0:
-        number = freegift
+        number = config.freegift
 
     if mname in user_dict:
         user_dict[mname] += number
     else:
         user_dict[mname] = number
     # 打印排名
-    show_user_rank(sort_dict(user_dict), 8)
+    show_user_rank(sort_dict(user_dict))
 
 
 # 对字典d进行排序 返回列表
@@ -29,18 +30,21 @@ def sort_dict(d):
 
 
 # print排名信息 列表名ls 显示个数number（前number个）
-def show_user_rank(ls, number):
+def show_user_rank(ls):
     print('============贡献榜============')
     print('%-4s%-7s%-10s' % ('│排名', '│贡献', '│用户'))
     i = 1
+    v = 1
     for item in ls:
-        if i <= number:
-            text1 = '│' + str(i)
+        if i <= config.number or config.number == 0:
+            text1 = '│' + str(v)
             text2 = '│' + str(item[1])
             text3 = '│' + str(item[0])
             print('%-5s%-8s%-10s' % (text1, text2, text3))
-            i += 1
-        elif i == number+1:
+            v += 1
+            if config.number != 0:
+                i += 1
+        elif i == config.number+1:
             print('......')
             break
     print('-----------------------------')

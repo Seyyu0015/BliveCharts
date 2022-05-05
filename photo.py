@@ -1,24 +1,25 @@
-"""
-用户信息
-
-"""
 import os
 import urllib
 from bilibili_api import user
 
 
+"""
+用户信息
+
+"""
+
+
 # 保存用户的头像
 async def face_download(usera):
-    print(usera)
     user_info = await usera.get_user_info()
     urlstr = user_info['face']
     mid = user_info['name']
     path = './userface/'
     try:
         urllib.request.urlretrieve(urlstr, filename=path + mid + '.png')
-        print('下载成功')
+        print('[Photo][下载成功]', str(user_info['mid']))
     except:
-        print('下载失败')
+        print('[Photo][下载失败]', str(user_info['mid']))
 
 
 # 防止重复下载
@@ -37,5 +38,5 @@ async def get_user_face(user_id_getface, user_display_name):
                 break
         # 下载头像
         if not exphoto:
-            print('Photo：尝试下载' + str(user_id_getface))
+            print('[Photo][尝试下载]', str(user_id_getface))
             await face_download(user.User(user_id_getface))
