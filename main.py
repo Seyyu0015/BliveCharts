@@ -26,6 +26,7 @@ room = live.LiveDanmaku(roomn)
 +rank_add_by_danmu：每发送一个弹幕所增加的贡献值。
 """
 user_id = 3456630
+user_name = 'null'
 rank_add_by_danmu = 1
 
 # 清空文件夹以刷新用户头像
@@ -40,13 +41,19 @@ async def on_danmaku(event):
     user_id = event['data']['info'][2][0]
     # 打印弹幕内容到输出
     print(datetime.datetime.now().strftime('%H:%M:%S'),  # 时间
-          ' [弹幕]', event['data']['info'][1],  # 内容
-          '\t\t{用户：', event['data']['info'][2][1],  # 用户名
-          '，房间：', event['room_display_id'], '}')  # 直播间
+          ' [弹幕]',
+          event['data']['info'][1],  # 内容
+          '\t\t{用户：',
+          event['data']['info'][2][1],  # 用户名
+          '，房间：',
+          event['room_display_id'], '}')  # 直播间
+
     user_id = int(event['data']['info'][2][0])
+    user_display_name = event['data']['info'][2][1]
+
     try:
-        rank.add_user_dict(user_id, rank_add_by_danmu)
-        await photo.get_user_face(user_id)
+        rank.add_user_dict(event['data']['info'][2][1], rank_add_by_danmu)
+        await photo.get_user_face(user_id, user_display_name)
     except:
         pass
 
@@ -55,16 +62,18 @@ async def on_danmaku(event):
 @room.on('SEND_GIFT')
 async def on_gift(event):
     print(datetime.datetime.now().strftime('%H:%M:%S'),
-          '【礼物】\t', event['data']['data']['uname'],
+          '【礼物】\t',
+          event['data']['data']['uname'],
           event['data']['data']['action'],
           event['data']['data']['giftName'],
-          '\t价值:', event['data']['data']['price'])
-    print(event)
+          '\t价值:',
+          event['data']['data']['price'])
+
     try:
         if event['data']['data']['giftName'] == '辣条':
-            rank.add_user_dict(user_id, 0)
+            rank.add_user_dict(event['data']['data']['uname'], 0)
         else:
-            rank.add_user_dict(user_id, event['data']['data']['price'])
+            rank.add_user_dict(event['data']['data']['uname'], event['data']['data']['price'])
         await photo.get_user_face(user_id)
     except:
         pass
