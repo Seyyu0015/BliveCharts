@@ -1,10 +1,10 @@
+
 import config
 
 """
 排名控制
 
 """
-
 
 user_dict = {}  # 初始化数组
 
@@ -20,10 +20,11 @@ def add_user_dict(mname, number: int):
     else:
         user_dict[mname] = number
     # 打印排名
+    print('\n\n\n\n[Rank][add_user_dict]用户', mname, '，贡献值增加：', number)
     show_user_rank(sort_dict(user_dict))
 
 
-# 对字典d进行排序 返回列表
+# 对字典d进行排序 返回rank_list列表
 def sort_dict(d):
     rank_list = sorted(d.items(), key=lambda x: x[1], reverse=True)
     return rank_list
@@ -44,7 +45,7 @@ def show_user_rank(ls):
             v += 1
             if config.number != 0:
                 i += 1
-        elif i == config.number+1:
+        elif i == config.number + 1:
             print('......')
             break
-    print('-----------------------------')
+    print('—————————————————————————————')
