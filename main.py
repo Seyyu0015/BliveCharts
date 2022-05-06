@@ -17,8 +17,8 @@ import rank
 room = live.LiveDanmaku(config.roomid)
 
 # 清空储存用户头像的文件夹以刷新用户头像
-shutil.rmtree('./userface')
-os.mkdir('./userface')
+# shutil.rmtree('./userface')
+# os.mkdir('./userface')
 
 
 # 弹幕触发方法
@@ -36,7 +36,7 @@ async def on_danmaku(event):
         # 调用增加贡献的方法
         rank.add_user_dict(event['data']['info'][2][1], config.rank_add_by_danmu)
         # 调用爬取头像的方法
-        # await photo.get_user_face(user_id, user_display_name)
+        await photo.get_user_face(user_id, user_display_name)
 
     except:
         pass
@@ -59,7 +59,7 @@ async def on_gift(event):
         else:
             rank.add_user_dict(event['data']['data']['uname'], event['data']['data']['price'])
         # 调用爬取头像的方法
-        # await photo.get_user_face(event['data']['data']['mid'])
+        await photo.get_user_face(event['data']['data']['mid'])
     except:
         pass
 
