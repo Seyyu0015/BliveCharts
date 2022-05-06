@@ -1,3 +1,4 @@
+import datetime
 
 import config
 
@@ -35,17 +36,15 @@ def show_user_rank(ls):
     print('============贡献榜============')
     print('%-4s%-7s%-10s' % ('│排名', '│贡献', '│用户'))
     i = 1
-    v = 1
     for item in ls:
-        if i <= config.number or config.number == 0:
-            text1 = '│' + str(v)
+        if i <= config.number:
+            text1 = '│' + str(i)
             text2 = '│' + str(item[1])
             text3 = '│' + str(item[0])
             print('%-5s%-8s%-10s' % (text1, text2, text3))
-            v += 1
+            i += 1
+        else:
+            print('│...')
             if config.number != 0:
-                i += 1
-        elif i == config.number + 1:
-            print('......')
-            break
+                break
     print('—————————————————————————————')
