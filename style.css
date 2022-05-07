@@ -1,0 +1,18 @@
+.show
+{
+    white-space: nowrap
+}
+
+.photos{
+    vertical-align:bottom
+}
+
+.texts{
+    text-align: center;
+}
+
+.img_show
+{
+    height: 100px;
+    width: 100px
+}
