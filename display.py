@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from bs4 import BeautifulSoup
 
 
@@ -14,6 +13,7 @@ def display_change(num: int, img_src: str, con: int):
         text = soup.find('td', id='text' + str(num))
         text.string = str(con)
 
+        # 防止页面出现乱码
         meta = soup.find('meta')
         meta['charset'] = 'gb18030'
 
@@ -21,5 +21,7 @@ def display_change(num: int, img_src: str, con: int):
         fh.write(soup.prettify())
 
 
+# 测试使用的方法
 if __name__ == '__main__':
     display_change(1, '冰糖糯米.png', 2)
+    display_change(2, '冰糖糯米.png', 12)
