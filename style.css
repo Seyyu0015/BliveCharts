@@ -1,18 +1,55 @@
+@font-face {
+    font-family: Minecraft;
+    src: url("resource/font.ttf");
+}
+
 .show
 {
-    white-space: nowrap
+    white-space: nowrap;
+}
+
+body
+{
+    background-image: url("resource/background.png");
+    background-repeat:no-repeat;
+}
+
+.photo_tr
+{
+    white-space: nowrap;
+    background-image: url("resource/background.png");
+    height: 89px;
+    width:732px
 }
 
 .photos{
-    vertical-align:bottom
+    vertical-align:bottom;
+    padding-top:9px;
+    padding-left:9px;
+    padding-right: 9px;
+}
+
+.photo_div{
+    position: relative;
+    text-shadow: 2px 2px #3E3E3E
+}
+
+.photo_div div{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #FCFCFC;
+    font-size: 32px;
+    font-family: Minecraft, serif;
+
 }
 
 .texts{
-    text-align: center;
+    text-align: right;
 }
 
 .img_show
 {
-    height: 100px;
-    width: 100px
+    height: 60px;
+    width: 60px
 }
