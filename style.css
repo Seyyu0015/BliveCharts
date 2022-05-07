@@ -3,7 +3,9 @@
     src: url("resource/font.ttf");
 }
 
+
 .show
+
 {
     white-space: nowrap;
 }

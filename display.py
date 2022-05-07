@@ -1,4 +1,7 @@
+import time
+
 from bs4 import BeautifulSoup
+from time import sleep
 
 
 # 将第num个图片替换为 img_src；将第num个文字替换为Con
@@ -32,5 +35,3 @@ def reset():
 
     with open("display_html.html", "w") as fh:
         fh.write(soup_null.prettify())
-
-
