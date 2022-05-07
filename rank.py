@@ -1,6 +1,7 @@
 import datetime
 
 import config
+import display
 
 """
 排名控制
@@ -42,6 +43,7 @@ def show_user_rank(ls):
             text2 = '│' + str(item[1])
             text3 = '│' + str(item[0])
             print('%-5s%-8s%-10s' % (text1, text2, text3))
+            display.display_change(i, str(item[0])+'.png', int(item[1]))
             i += 1
         else:
             print('│...')

@@ -2,7 +2,7 @@
 """
 +roomid： 直播间id，程序会连接到该直播间
 """
-roomid = 21925332
+roomid = 94277
 
 
 """
@@ -12,4 +12,4 @@ roomid = 21925332
 """
 rank_add_by_danmu = 1
 freegift = 1
-number = 6
+number = 9

@@ -17,8 +17,8 @@ import rank
 room = live.LiveDanmaku(config.roomid)
 
 # 清空储存用户头像的文件夹以刷新用户头像
-# shutil.rmtree('./userface')
-# os.mkdir('./userface')
+shutil.rmtree('./userface')
+os.mkdir('./userface')
 
 
 # 弹幕触发方法
