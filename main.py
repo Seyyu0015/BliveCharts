@@ -15,8 +15,8 @@ import rank
 room = live.LiveDanmaku(config.roomid)
 
 # 清空储存用户头像的文件夹以刷新用户头像
-shutil.rmtree('./userface')
-os.mkdir('./userface')
+# shutil.rmtree('./userface')
+# os.mkdir('./userface')
 
 # 清空显示框
 display.reset()
@@ -49,7 +49,7 @@ async def on_gift(event):
             rank.add_user_dict(event['data']['data']['uname'], 0)
         # 调用增加贡献的方法
         else:
-            rank.add_user_dict(event['data']['data']['uname'], event['data']['data']['price']/1000)
+            rank.add_user_dict(event['data']['data']['uname'], event['data']['data']['price']/100)
         # 调用爬取头像的方法
         await photo.get_user_face(event['data']['data']['mid'])
     except:
