@@ -15,8 +15,9 @@ import rank
 room = live.LiveDanmaku(config.roomid)
 
 # 清空储存用户头像的文件夹以刷新用户头像
-# shutil.rmtree('./userface')
-# os.mkdir('./userface')
+if config.clear_photos_pertime:
+    shutil.rmtree('./userface')
+    os.mkdir('./userface')
 
 # 清空显示框
 display.reset()
