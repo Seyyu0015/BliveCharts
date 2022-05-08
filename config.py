@@ -1,11 +1,10 @@
 
 """
 +roomid： 直播间id，程序会连接到该直播间
-+clear_photos_pertime： 1每次启动清空头像（可刷新头像） 0不清空头像
++clear_photos_pertime： Ture每次启动清空头像（可刷新头像） False不清空头像
 """
 roomid = 8763308
 clear_photos_pertime = False
-w
 
 """
 
