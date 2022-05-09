@@ -50,16 +50,19 @@ async def on_danmaku(event):
 # 礼物触发方法
 @room.on('SEND_GIFT')
 async def on_gift(event):
+    global user_dict
     # 根据礼物增加贡献
     try:
         # 修复辣条意外价值为100的问题
         if event['data']['data']['giftName'] == '辣条':
             rank.add_user_dict(event['data']['data']['uname'], config.freegift)
-        # 调用增加贡献的方法
         else:
             rank.add_user_dict(event['data']['data']['uname'], event['data']['data']['price'] / config.price)
+
         # 调用爬取头像的方法
-        await photo.get_user_face(event['data']['data']['mid'])
+        user_dict[event['data']['data']['mid']] = event['data']['data']['uname']
+        for key, value in user_dict.items():
+            await photo.get_user_face(key, value)
     except:
         pass
 
