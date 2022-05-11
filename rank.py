@@ -1,28 +1,26 @@
-import datetime
-
 import config
 import display
 
 """
-排名控制
+排名控制器
 
 """
 
 user_dict = {}  # 初始化数组
 
 
-# 增加排行字典 为 mname的用户增加 number积分
-def add_user_dict(mname, number: int):
+# 增加排行字典 为 name的用户增加 number积分
+def add_user_dict(name, number):
     # 免费礼物价值
     if number == 0:
-        number = config.freegift
+        number = config.free_gift
 
-    if mname in user_dict:
-        user_dict[mname] += number
+    if name in user_dict:
+        user_dict[name] += number
     else:
-        user_dict[mname] = number
+        user_dict[name] = number
     # 打印排名
-    print('\n\n\n\n[Rank][add_user_dict]用户', mname, '，贡献值增加：', number)
+    print('\n\n\n\n[Rank][add_user_dict]用户', name, '，贡献值增加：', number)
     show_user_rank(sort_dict(user_dict))
 
 
@@ -46,7 +44,7 @@ def show_user_rank(ls):
             display.display_change(i, str(item[0])+'.png', int(item[1]))
             i += 1
         else:
-            print('│...')
+            print('│......')
             if config.number != 0:
                 break
     print('—————————————————————————————')

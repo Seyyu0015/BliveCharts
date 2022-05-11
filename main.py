@@ -1,6 +1,4 @@
-import os
-import shutil
-from bilibili_api import live, sync
+from bilibili_api import live, sync, user
 import config
 import display
 import photo
@@ -14,34 +12,23 @@ import rank
 # 创建直播间对象
 room = live.LiveDanmaku(config.roomid)
 
-# 用于检查头像的字典
-user_dict = {}
-
-# 清空储存用户头像的文件夹以刷新用户头像
-if config.clear_photos_pertime:
-    shutil.rmtree('./userface')
-    os.mkdir('./userface')
-
-# 清空显示框
+# 重置html文件
 display.reset()
 
 
 # 弹幕触发方法
 @room.on('DANMU_MSG')
 async def on_danmaku(event):
-    global user_dict
-    # 获取发送弹幕的用户的信息
-    user_id = int(event['data']['info'][2][0])  # 用户id
-    user_display_name = event['data']['info'][2][1]  # 用户昵称
+    # 根据弹幕获得信息
+    user_id = int(event['data']['info'][2][0])
+    user_name = event['data']['info'][2][1]
 
+    print(user_id, user_name)
     try:
-        # 调用增加贡献的方法
-        rank.add_user_dict(user_display_name, config.rank_add_by_danmu)
-
         # 调用爬取头像的方法
-        user_dict[user_id] = user_display_name
-        for key, value in user_dict.items():
-            await photo.get_user_face(key, value)
+        await photo.face_download_by_danmu(user.User(user_id))
+        # 调用增加贡献的方法
+        rank.add_user_dict(user_name, config.rank_add_by_danmu)
 
     except:
         pass
@@ -50,19 +37,26 @@ async def on_danmaku(event):
 # 礼物触发方法
 @room.on('SEND_GIFT')
 async def on_gift(event):
-    global user_dict
-    # 根据礼物增加贡献
-    try:
-        # 修复辣条意外价值为100的问题
-        if event['data']['data']['giftName'] == '辣条':
-            rank.add_user_dict(event['data']['data']['uname'], config.freegift)
-        else:
-            rank.add_user_dict(event['data']['data']['uname'], event['data']['data']['price'] / config.price)
+    # 根据礼物获得信息
+    user_name = event['data']['data']['uname']
+    user_face = event['data']['data']['face']
+    gift_name = event['data']['data']['giftName']
+    gift_price = event['data']['data']['price']
+    gift_num = event['data']['data']['num']
 
-        # 调用爬取头像的方法
-        user_dict[event['data']['data']['mid']] = event['data']['data']['uname']
-        for key, value in user_dict.items():
-            await photo.get_user_face(key, value)
+    # 调用爬取头像的方法
+    await photo.face_download_by_gift(user_name, user_face)
+
+    # 根据礼物数量和价值计算总贡献
+    total_price = gift_price * gift_num / config.price
+
+    # 调用增加贡献的方法
+    try:
+        if gift_name == '辣条':
+            rank.add_user_dict(user_name, config.free_gift)
+        else:
+            rank.add_user_dict(user_name, total_price)
+
     except:
         pass
 
