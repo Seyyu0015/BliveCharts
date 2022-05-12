@@ -2,6 +2,9 @@
 连接Bilibili直播间，对用户互动行为量化统计并排行，并以《我的世界》风格在OBS内作为插件展示给观众。
 ![OBS内效果](https://user-images.githubusercontent.com/103107612/167257703-1c2f0aa7-ef76-4675-ad16-22aa8343eacb.png)
 
+# 视频展示
+https://www.bilibili.com/video/BV1jr4y1t71Q/
+
 # 使用插件
 ![输入id](https://user-images.githubusercontent.com/103107612/167257797-88d416ea-b11e-4040-8a75-d351af61d289.png)
 
