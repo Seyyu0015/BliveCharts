@@ -53,7 +53,7 @@ async def on_gift(event):
     # 调用增加贡献的方法
     try:
         if gift_name == '辣条':
-            rank.add_user_dict(user_name, config.free_gift)
+            rank.add_user_dict(user_name, config.free_gift * gift_num)
         else:
             rank.add_user_dict(user_name, total_price)
 
