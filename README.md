@@ -10,7 +10,9 @@
 ### 简介
 连接到Bilibili直播间后，对直播间观众的互动行为进行量化统计并排名，之后以《我的世界》风格展示给观众。  
 ### 使用效果展示  
-哔哩哔哩:[《Minecraft》风格的“直播贡献榜”使用效果展示](https://www.bilibili.com/video/BV1jr4y1t71Q/)
+下方的“物品栏”中会显示贡献值前9的观众的头像和贡献值  
+![使用效果图](https://user-images.githubusercontent.com/103107612/169229142-e69fda12-539b-42a4-9fc0-c818ea056d6a.png)  
+视频展示:[《Minecraft》风格的“直播贡献榜”使用效果展示](https://www.bilibili.com/video/BV1jr4y1t71Q/)
 ### 如何使用
 1. 在“config.py”文件中配置直播间ID  
 2. 打开“style.css”文件，复制全部内容  
@@ -33,7 +35,11 @@
 自动保存直播中的弹幕信息，统计每个汉字的出现频率，渲染为柱状图并保存  
 * danmusave/txt 保存弹幕文本的文件夹  
 * danmusave/png 保存柱状图的文件夹
-###如何使用
+### 使用效果展示
+2022年5月13日的弹幕频率图  
+![弹幕频率图](https://user-images.githubusercontent.com/103107612/169229650-0c69052f-e3e6-430b-b12e-c15329780c04.png)  
+
+### 如何使用
 1. 修改项目根目录中的“config.py”文件  
 + 使以下两项均为True (变量名 = 默认值 # 描述)  
    - save_danmu = True # 是否保存弹幕
