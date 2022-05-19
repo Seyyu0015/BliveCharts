@@ -28,18 +28,17 @@ async def on_danmaku(event):
 
     # 分析弹幕
     if config.save_danmu:
-        with open('danmusave/' + time + 'danmu' + '.txt', "a") as f:
+        with open('danmusave/txt/' + time + 'danmu' + '.txt', "a") as f:
             f.write(danmu_text)
         if config.danmu_bar:
             danmu_bar.rank(time)
 
-
+    # noinspection PyBroadException
     try:
         # 调用爬取头像的方法
         await photo.face_download_by_danmu(user.User(user_id))
         # 调用增加贡献的方法
         rank.add_user_dict(user_name, config.rank_add_by_danmu)
-
     except:
         pass
 
@@ -59,12 +58,12 @@ async def on_gift(event):
     await photo.face_download_by_gift(user_name, user_face)
 
     # 调用增加贡献的方法
+    # noinspection PyBroadException
     try:
         if gift_name == '辣条' or gift_name == '小心心':
             rank.add_user_dict(user_name, config.free_gift * gift_num)
         else:
             rank.add_user_dict(user_name, total_price)
-
     except:
         pass
 

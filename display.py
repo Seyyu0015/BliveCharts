@@ -1,5 +1,8 @@
 from bs4 import BeautifulSoup
+"""
+用于更新显示页面的脚本
 
+"""
 
 # 将第num个图片替换为 img_src；将第num个文字替换为Con
 def display_change(num: int, img_src: str, con: int):

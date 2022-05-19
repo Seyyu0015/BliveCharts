@@ -1,7 +1,7 @@
 import urllib
 
 """
-用户头像下载器
+用于下载用户头像的脚本
 
 """
 
@@ -17,6 +17,7 @@ async def face_download_by_danmu(user_obj):
 # 通过礼物 保存用户的头像
 async def face_download_by_gift(user_name, user_face):
     path = './userface/'
+    # noinspection PyBroadException
     try:
         urllib.request.urlretrieve(user_face, filename=path + user_name + '.png')
     except:

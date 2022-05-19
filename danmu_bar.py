@@ -8,11 +8,12 @@ from pylab import mpl
 """
 global file_time
 
+# 统计以danmu_time开头的弹幕存档文件
 def read_file(danmu_time):
     global file_time
     file_time = danmu_time
     
-    with open('danmusave/' + file_time + 'danmu.txt', 'r') as f:
+    with open('danmusave/txt/' + file_time + 'danmu.txt', 'r') as f:
         # 空字典用来存储文本中的单字
         word = {}
         
@@ -32,6 +33,7 @@ def read_file(danmu_time):
         return rank_list
 
 
+# 根据read_file读取的信息绘制柱状图
 def show_rank(rank_list):
     # 设置显示中文字体
     mpl.rcParams["font.sans-serif"] = ["SimHei"]
@@ -51,6 +53,7 @@ def show_rank(rank_list):
     plt.ylabel('出现次数')
     title = '弹幕单字频率   ' + file_time
     plt.title(title)
+    plt.savefig('danmusave/png/' + file_time + 'danmu.png')
     plt.show()
 
 

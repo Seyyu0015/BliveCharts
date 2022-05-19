@@ -2,18 +2,16 @@
 ## 简介
 这是一款在OBS内使用的直播插件，目前包含以下功能  
 * 观众互动排行  
+* 弹幕高频字分析
 
 目前计划开发的功能
 * 弹幕显示
-* 弹幕高频字分析
 ## 观众互动排行
 ### 简介
 连接到Bilibili直播间后，对直播间观众的互动行为进行量化统计并排名，之后以《我的世界》风格展示给观众。  
-![OBS内效果](https://user-images.githubusercontent.com/103107612/167257703-1c2f0aa7-ef76-4675-ad16-22aa8343eacb.png)  
 ### 使用效果展示  
- 哔哩哔哩：https://www.bilibili.com/video/BV1jr4y1t71Q/  
+哔哩哔哩:[《Minecraft》风格的“直播贡献榜”使用效果展示](https://www.bilibili.com/video/BV1jr4y1t71Q/)
 ### 如何使用
-![输入id](https://user-images.githubusercontent.com/103107612/167257797-88d416ea-b11e-4040-8a75-d351af61d289.png)  
 1. 在“config.py”文件中配置直播间ID  
 2. 打开“style.css”文件，复制全部内容  
 3. 打开OBS 添加“浏览器源” 勾选本地文件并选择“display_html.html”文件   
@@ -23,13 +21,27 @@
 4. 点击“确定”插件就会出现在舞台内  
 5. 运行“main.py”  
 ### 配置文件
-* roomid： 直播间id，程序会连接到该直播间  
-* rank_add_by_danmu： 每发送一个弹幕所增加的贡献值  
-* price： 礼物价值和增加贡献的比值（金瓜子：贡献）  
-* free_gift： 免费礼物增加的贡献值,0 为不增加  
-* number：排行榜显示个数  
+项目根目录中的“config.py”文件 (变量名 = 默认值 # 描述)
+* roomid = 8763308  # 直播间id，程序会连接到该直播间。
+* rank_add_by_danmu = 1  # 每发送一个弹幕所增加的贡献值。
+* free_gift = 1  # 免费礼物增加的贡献值,0为不增加。
+* price = 100  # 礼物价值和增加贡献的比值（金瓜子：贡献）
+* number = 9  # 排行榜显示个数 0:不限制显示个数 建议不要修改。
+
+## 弹幕高频字分析
+### 简介
+自动保存直播中的弹幕信息，统计每个汉字的出现频率，渲染为柱状图并保存  
+* danmusave/txt 保存弹幕文本的文件夹  
+* danmusave/png 保存柱状图的文件夹
+###如何使用
+1. 修改项目根目录中的“config.py”文件  
++ 使以下两项均为True (变量名 = 默认值 # 描述)  
+   - save_danmu = True # 是否保存弹幕
+   - danmu_bar = True # 是否分析弹幕  
++ 使“roomid”为想要连接的直播间
+   - roomid = 8763308  # 直播间id，程序会连接到该直播间。
+2. 运行“main.py”
+3. 生成的文本存档和柱状图会保存在相应目录内
 ### 其他  
 * 可能因为爬取头像过于频繁导致暂时无法获取头像，数小时后恢复  
-* “运行”中会输出更详细的排名信息  
-* 可以从“config.py”中分别配置每条弹幕和免费礼物增加的贡献值  
-![运行中输出](https://user-images.githubusercontent.com/103107612/167257982-18849e35-c38d-4e50-acd2-0bac44809ef6.png)
+
