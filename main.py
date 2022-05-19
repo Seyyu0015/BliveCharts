@@ -3,14 +3,16 @@ import config
 import display
 import photo
 import rank
+import time
+import danmu_bar
 
 """
 主方法
 
 """
-
-# 创建直播间对象
+# 创建直播间对象 获取当前时间
 room = live.LiveDanmaku(config.roomid)
+time = time.strftime("%Y-%m-%d_", time.localtime())
 
 # 重置html文件
 display.reset()
@@ -22,8 +24,16 @@ async def on_danmaku(event):
     # 根据弹幕获得信息
     user_id = int(event['data']['info'][2][0])
     user_name = event['data']['info'][2][1]
+    danmu_text = event['data']['info'][1]
 
-    print(user_id, user_name)
+    # 分析弹幕
+    if config.save_danmu:
+        with open('danmusave/' + time + 'danmu' + '.txt', "a") as f:
+            f.write(danmu_text)
+        if config.danmu_bar:
+            danmu_bar.rank(time)
+
+
     try:
         # 调用爬取头像的方法
         await photo.face_download_by_danmu(user.User(user_id))
@@ -43,12 +53,10 @@ async def on_gift(event):
     gift_name = event['data']['data']['giftName']
     gift_price = event['data']['data']['price']
     gift_num = event['data']['data']['num']
+    total_price = gift_price * gift_num / config.price
 
     # 调用爬取头像的方法
     await photo.face_download_by_gift(user_name, user_face)
-
-    # 根据礼物数量和价值计算总贡献
-    total_price = gift_price * gift_num / config.price
 
     # 调用增加贡献的方法
     try:

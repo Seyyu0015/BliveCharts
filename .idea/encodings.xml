@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/danmusave/2022-05-19_danmu.txt" charset="GBK" />
     <file url="file://$PROJECT_DIR$/display_html.html" charset="GBK" />
     <file url="file://$PROJECT_DIR$/display_html_null.html" charset="GBK" />
   </component>
