@@ -1,22 +1,29 @@
 import re
+
 import matplotlib.pyplot as plt
 from pylab import mpl
 
-"""
-绘图脚本
+"""绘图脚本。
 
+绘制弹幕频率柱状图
 """
+
 global file_time
 
-# 统计以danmu_time开头的弹幕存档文件
+
 def read_file(danmu_time):
+    """统计以danmu_time开头的弹幕存档文件.
+
+    :param danmu_time: 日期
+    :return: 单字频率排名
+    """
     global file_time
     file_time = danmu_time
-    
+
     with open('danmusave/txt/' + file_time + 'danmu.txt', 'r') as f:
         # 空字典用来存储文本中的单字
         word = {}
-        
+
         # 清除符号
         for word_str in f.readlines():
             word_str = re.sub('[^\u4e00-\u9fa5]+', '', word_str)
@@ -33,13 +40,19 @@ def read_file(danmu_time):
         return rank_list
 
 
-# 根据read_file读取的信息绘制柱状图
 def show_rank(rank_list):
+    """根据read_file读取的信息绘制柱状图.
+
+    :param rank_list: 单字频率排名
+    :return:
+    """
     # 设置显示中文字体
     mpl.rcParams["font.sans-serif"] = ["SimHei"]
+
     # 准备数据
     x_bar_text = []
     y_bar_num = []
+
     # 显示的个数
     show_num = 5
     for i in rank_list:
@@ -48,6 +61,7 @@ def show_rank(rank_list):
         show_num -= 1
         if show_num == 0:
             break
+
     # 绘制柱状图
     plt.bar(x_bar_text, y_bar_num)
     plt.ylabel('出现次数')
