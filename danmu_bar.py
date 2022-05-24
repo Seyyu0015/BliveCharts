@@ -8,7 +8,7 @@ from pylab import mpl
 绘制弹幕频率柱状图
 """
 
-global file_time
+global FILE_TIME
 
 
 def read_file(danmu_time):
@@ -17,10 +17,10 @@ def read_file(danmu_time):
     :param danmu_time: 日期
     :return: 单字频率排名
     """
-    global file_time
-    file_time = danmu_time
+    global FILE_TIME
+    FILE_TIME = danmu_time
 
-    with open('danmusave/txt/' + file_time + 'danmu.txt', 'r') as f:
+    with open('danmusave/txt/' + FILE_TIME + 'danmu.txt', 'r') as f:
         # 空字典用来存储文本中的单字
         word = {}
 
@@ -65,9 +65,9 @@ def show_rank(rank_list):
     # 绘制柱状图
     plt.bar(x_bar_text, y_bar_num)
     plt.ylabel('出现次数')
-    title = '弹幕单字频率   ' + file_time
+    title = '弹幕单字频率   ' + FILE_TIME
     plt.title(title)
-    plt.savefig('danmusave/png/' + file_time + 'danmu.png')
+    plt.savefig('danmusave/png/' + FILE_TIME + 'danmu.png')
     plt.show()
 
 
