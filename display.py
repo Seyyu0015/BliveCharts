@@ -1,14 +1,15 @@
 from bs4 import BeautifulSoup
 
-"""更新显示页面。
+"""
+更新显示页面。
 
 改变“display_html.html”的图片地址和文本内容
 """
 
 
 def display_change(num: int, img_src: str, con: int):
-    """将第num个图片替换为 img_src；将第num个文字替换为Con。
-
+    """
+    将第num个图片替换为 img_src；将第num个文字替换为Con。
     :param num: 排名
     :param img_src: 图片本地地址
     :param con: 贡献值
@@ -36,8 +37,8 @@ def display_change(num: int, img_src: str, con: int):
 
 
 def reset():
-    """清空显示页面.
-
+    """
+    清空显示页面.
     :return:
     """
     # 从预设空页面获取信息

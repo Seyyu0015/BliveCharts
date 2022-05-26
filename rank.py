@@ -1,7 +1,8 @@
 import config
 import display
 
-"""排名处理。
+"""
+排名处理。
 
 用于保存和计算用户排名
 """
@@ -10,8 +11,8 @@ user_dict = {}  # 初始化数组
 
 
 def add_user_dict(name, number):
-    """为用户增加积分的方法
-
+    """
+    为用户增加积分的方法
     :param name: 用户的昵称
     :param number: 增加的贡献值
     :return:
@@ -32,8 +33,8 @@ def add_user_dict(name, number):
 
 
 def sort_dict(d):
-    """排序存储用户贡献的字典为列表。
-
+    """
+    排序存储用户贡献的字典为列表。
     :param d: 储存用户贡献的字典
     :return: 排名列表
     """
@@ -43,8 +44,8 @@ def sort_dict(d):
 
 
 def show_user_rank(ls):
-    """打印排名信息。
-
+    """
+    打印排名信息。
     :param ls: 打印的列表
     :return:
     """

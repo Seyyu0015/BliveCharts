@@ -8,7 +8,8 @@ import config
 import display
 import danmu_bar
 
-"""主方法。
+"""
+主方法。
 
 连接直播间并调用其他模块
 """
@@ -21,8 +22,8 @@ display.reset()  # 重置页面
 
 @room.on('DANMU_MSG')
 async def on_danmaku(event):
-    """检测到弹幕时触发的方法。
-
+    """
+    检测到弹幕时触发的方法。
     :param event: 弹幕对象
     :return:
     """
@@ -49,8 +50,8 @@ async def on_danmaku(event):
 
 @room.on('SEND_GIFT')
 async def on_gift(event):
-    """检测到礼物时触发的方法。
-
+    """
+    检测到礼物时触发的方法。
     :param event: 礼物对象
     :return:
     """

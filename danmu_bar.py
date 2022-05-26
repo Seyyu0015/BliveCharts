@@ -3,7 +3,8 @@ import re
 import matplotlib.pyplot as plt
 from pylab import mpl
 
-"""绘图脚本。
+"""
+绘图脚本。
 
 绘制弹幕频率柱状图
 """
@@ -12,8 +13,8 @@ global FILE_TIME
 
 
 def read_file(danmu_time):
-    """统计以danmu_time开头的弹幕存档文件.
-
+    """
+    统计以danmu_time开头的弹幕存档文件.
     :param danmu_time: 日期
     :return: 单字频率排名
     """
@@ -41,8 +42,8 @@ def read_file(danmu_time):
 
 
 def show_rank(rank_list):
-    """根据read_file读取的信息绘制柱状图.
-
+    """
+    根据read_file读取的信息绘制柱状图.
     :param rank_list: 单字频率排名
     :return:
     """
